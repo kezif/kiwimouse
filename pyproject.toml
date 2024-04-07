@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kiwimouse"
+version = "1.0.0"
+authors = [
+  { name="Kezif", email="kezif6262@gmail.com" },
+]
+description = "Simulate mouse inputs in 3d games"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: Microsoft :: Windows",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Testing",
+]
+
+[project.urls]
+Homepage = "https://github.com/kezif/kiwimouse"
+Issues = "https://github.com/kezif/kiwimouse/issues"
