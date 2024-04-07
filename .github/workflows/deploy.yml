@@ -1,0 +1,84 @@
+name: Deploy
+
+on:    
+  push:
+    branches:
+      - master
+  workflow_call:
+
+permissions:
+  contents: write
+
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
+  lint:
+    uses: ./.github/workflows/linter.yml
+  deploy:
+    # if: github.actor.repository_owner == 'kezif'
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [tests, lint]
+    steps:
+      - name: Exit if not on master branch
+        if: endsWith(github.ref, 'master') == false
+        run: exit -1
+
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install Python
+        run: |  
+          python.exe -m pip install --upgrade pip |
+          pip install hatch  
+        
+      - name: Install Requirements
+        if: ${{ hashFiles('requirements.txt') != '' }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Bump Version
+        run: |
+          if [ ${{contains(github.event.head_commit.message, '#major') }} == true ]; then
+            hatch version major
+          elif [ ${{contains(github.event.head_commit.message, '#minor') }} == true ]; then
+            hatch version minor;
+          else
+            hatch version fix;
+          fi
+        shell: bash
+
+      - name: Update changes in GitHub repository
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git pull
+          git add src/${{github.event.repository.name}}/__about__.py
+          git commit -m "Changed version to $(hatch version)"
+          git push
+
+      - name: Push git tag
+        id: push-git-tag
+        run: |
+          NEW_TAG=$(hatch version)
+          git tag $NEW_TAG
+          git push origin $NEW_TAG
+        shell: bash
+
+
+      - name: Build package
+        run: |
+          hatch build 
+
+      - name: Publish package on TestPyPI
+        run: hatch publish -r test
+        env:
+          HATCH_INDEX_USER: __token__
+          HATCH_INDEX_AUTH: ${{ secrets.TEST_PYPI_API_TOKEN }}

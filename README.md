@@ -1,5 +1,7 @@
+[![PyPI version](https://badge.fury.io/py/kiwimouse.svg)](https://badge.fury.io/py/kiwimouse)
+
 # KiwiMouse
-Simulate mouse movement in 3d games using this package.
+Simulate mouse movement in 3d DirectX games using this package.
 
 # Dependencies
 Windows has no dependencies. The Win32 extensions do not need to be installed.
@@ -17,7 +19,7 @@ kiwimouse.move(0, -500)  # move mouse up 500 px
 kiwimouse.click(button='left')  # click left mouse button
 kiwimouse.move(0, 500)  # move mouse down 500 px
 ```
-![ultrakill example](https://github.com/kezif/kiwimouse/assets/11709254/3eb8d316-c810-49f9-b9d4-6be930d9cedb)
+![ultrakill example](https://github.com/kezif/kiwimouse/assets/11709254/0e0d7868-c8b5-48c0-add0-0151edb8feec)
 
 Dy default after each operation `time.sleep(.1)` is executed. You can change it by altering `kiwimouse.PAUSE` value
 

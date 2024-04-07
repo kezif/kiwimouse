@@ -1,5 +1,7 @@
-import kiwimouse
 import time
+
+import kiwimouse
+
 
 def square():
     """
@@ -13,6 +15,7 @@ def square():
     time.sleep(1)
     kiwimouse.move(200, 0)
 
+
 def click_left():
     """
     click left mouse button
@@ -20,7 +23,7 @@ def click_left():
     kiwimouse.click()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     square()
     time.sleep(1)
     click_left()

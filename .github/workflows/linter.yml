@@ -1,0 +1,47 @@
+name: Lint
+
+on: 
+  push:
+    branches-ignore:
+      - master
+  pull_request:
+    
+  workflow_call:
+
+permissions:
+  contents: write
+  
+  
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run black
+        uses: psf/black@stable
+      - name: Run black
+        uses: psf/black@stable
+        with:
+          options: "--verbose"
+          options: "--verbose"
+          jupyter: true
+
+      - name: Run isort
+        uses: isort/isort-action@v1
+        with:
+            requirements-files: "requirements.txt"
+            configuration: "--verbose --profile black"
+
+      - name: Update changes if any to GitHub repository
+        run:
+          git config user.name github-actions;
+          git config user.email github-actions@github.com;
+          git pull;
+          git add . ;
+          git commit -m "Applied Black code style and sorted imports" || echo no changes;
+          git push || echo no changes;
+        shell: bash
+
+  
+          
+            
