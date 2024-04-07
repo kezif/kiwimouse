@@ -17,6 +17,7 @@ kiwimouse.move(0, -500)  # move mouse up 500 px
 kiwimouse.click(button='left')  # click left mouse button
 kiwimouse.move(0, 500)  # move mouse down 500 px
 ```
+![ultrakill example](https://github.com/kezif/kiwimouse/assets/11709254/3eb8d316-c810-49f9-b9d4-6be930d9cedb)
 
 Dy default after each operation `time.sleep(.1)` is executed. You can change it by altering `kiwimouse.PAUSE` value
 
