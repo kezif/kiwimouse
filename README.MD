@@ -1,12 +1,13 @@
-[![PyPI version](https://badge.fury.io/py/kiwimouse.svg)](https://badge.fury.io/py/kiwimouse)
-
 # KiwiMouse
 Simulate mouse movement in 3d games using this package.
 
-# Dependencies
-Windows has no dependencies. The Win32 extensions do not need to be installed.
 
-# Example Usage
+[![PyPI version](https://badge.fury.io/py/kiwimouse.svg)](https://badge.fury.io/py/kiwimouse)
+
+# Install
+You can install package via `pip install kiwi mouse`
+
+# Usage
 ##  Mouse Control
 The x, y coordinates used by kiwimouse are relative to the current mouse position. The x coordinates increase going to the right (just as in mathematics) but the y coordinates increase going down (the opposite of mathematics). Keep in mind that in 3d games mouse movement is not correlated 1:1 to the monitor pixel position. 
 
@@ -25,6 +26,9 @@ Dy default after each operation `time.sleep(.1)` is executed. You can change it 
 
 # Documentation
 The `mouse event` windows documentation could be found at [link](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mouse_event)
+
+# Dependencies
+Windows has no dependencies. The Win32 extensions do not need to be installed.
 
 # Testing
 
