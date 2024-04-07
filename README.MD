@@ -1,3 +1,5 @@
+[![PyPI version](https://badge.fury.io/py/kiwimouse.svg)](https://badge.fury.io/py/kiwimouse)
+
 # KiwiMouse
 Simulate mouse movement in 3d games using this package.
 
@@ -28,7 +30,7 @@ The `mouse event` windows documentation could be found at [link](https://learn.m
 
 To run the supplied tests: first setup a virtualenv. Then you can pip install this project in an editable state by doing `pip install -e .`. This allows any edits you make to these project files to be reflected when you run the tests. Run the test file with `python3 tests`.
 
-I have been testing with ULTRAKILL to confirm that these inputs work with DirectX games.
+I have been testing with ULTRAKILL and cs2 to confirm that these inputs work with DirectX games.
 
 # Features Implemented
 
