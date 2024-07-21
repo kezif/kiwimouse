@@ -1,11 +1,6 @@
 name: Release
 
-on:
-  push:
-    branches:
-      - github_actions_integration
-
-      
+on:    
   workflow_run:
     workflows: ["Tests", "Lint"]
  
@@ -13,11 +8,13 @@ jobs:
   
 
   release:
-    
-    if: github.actor .repository_owner == 'kezif'
+    if: github.actor.repository_owner == 'kezif'
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - name: Exit if not on master branch
+        if: endsWith(github.ref, 'master') == false
+        run: exit -1
       - name: Check out the repository
         uses: actions/checkout@v3
         
