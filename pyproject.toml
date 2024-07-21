@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kiwimouse"
-version = "1.0.0"
+dynamic = ["version"]
 authors = [
   { name="Kezif", email="kezif6262@gmail.com" },
 ]
@@ -22,3 +22,9 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/kezif/kiwimouse"
 Issues = "https://github.com/kezif/kiwimouse/issues"
+
+[tool.hatch.version]
+path = "src/kiwimouse/__about__.py"
+
+[tool.isort]
+profile = "black"
