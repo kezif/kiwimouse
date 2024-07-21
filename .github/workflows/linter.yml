@@ -17,3 +17,4 @@ jobs:
         uses: isort/isort-action@v1
         with:
             requirements-files: "requirements.txt"
+            configuration: "--verbose"
