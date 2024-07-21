@@ -25,3 +25,6 @@ Issues = "https://github.com/kezif/kiwimouse/issues"
 
 [tool.hatch.version]
 path = "src/kiwimouse/__about__.py"
+
+[tool.isort]
+profile = "black"
