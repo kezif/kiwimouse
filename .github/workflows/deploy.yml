@@ -88,7 +88,7 @@ jobs:
 
       - name: Publish package on PyPI
         if: steps.bump_result.outputs.to_push == true
-        run: hatch publish -r test
+        run: hatch publish
         env:
           HATCH_INDEX_USER: __token__
           HATCH_INDEX_AUTH: ${{ secrets.PYPI_API_TOKEN }}
