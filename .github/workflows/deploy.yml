@@ -45,17 +45,24 @@ jobs:
           pip install -r requirements.txt
 
       - name: Bump Version
+        id: bump_result
         run: |
-          if [ ${{contains(github.event.head_commit.message, '#major') }} == true ]; then
+          if [ ${{contains(github.event.head_commit.message, '#noversion') }} == true ]; then
+            echo "to_push=false" >> $GITHUB_OUTPUT  
+          elif [ ${{contains(github.event.head_commit.message, '#major') }} == true ]; then
             hatch version major
+            echo "to_push=true" >> $GITHUB_OUTPUT 
           elif [ ${{contains(github.event.head_commit.message, '#minor') }} == true ]; then
             hatch version minor;
+            echo "to_push=true" >> $GITHUB_OUTPUT 
           else
             hatch version fix;
+            echo "to_push=true" >> $GITHUB_OUTPUT
           fi
         shell: bash
 
       - name: Update changes in GitHub repository
+        if: steps.bump_result.outputs.to_push
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -66,6 +73,7 @@ jobs:
 
       - name: Push git tag
         id: push-git-tag
+        if: steps.bump_result.outputs.to_push 
         run: |
           NEW_TAG=$(hatch version)
           git tag $NEW_TAG
@@ -74,11 +82,13 @@ jobs:
 
 
       - name: Build package
+        if: steps.bump_result.outputs.to_push
         run: |
           hatch build 
 
       - name: Publish package on PyPI
-        run: hatch publish
+        if: steps.bump_result.outputs.to_push
+        run: hatch publish -r test
         env:
           HATCH_INDEX_USER: __token__
           HATCH_INDEX_AUTH: ${{ secrets.PYPI_API_TOKEN }}
