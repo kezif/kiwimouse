@@ -12,9 +12,9 @@ permissions:
 
 jobs:
   tests:
-    uses: ./.github/workflows/tests.yml
+    uses: kezif/kiwimouse/.github/workflows/tests.yml
   lint:
-    uses: ./.github/workflows/linter.yml
+    uses: kezif/kiwimouse/.github/workflows/linter.yml
   deploy:
     # if: github.actor.repository_owner == 'kezif'
     name: Deploy
